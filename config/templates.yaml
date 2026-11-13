@@ -99,7 +99,7 @@ templates:
 
       You can pay online here: {{pay_link}}
 
-      If you are finding it hard to pay right now, please get in touch with our support team. We are happy to talk through your options.
+      If you are finding it hard to pay at the moment, please get in touch with our support team. We are happy to talk through your options.
     closing: "Thank you for your attention."
     cta: "Pay your bill online."
     claims:
