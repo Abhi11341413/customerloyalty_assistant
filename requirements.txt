@@ -1,12 +1,4 @@
-# pandas
-# openpyxl
-# ucimlrepo
-# kaggle
-# requests
-# beautifulsoup4
-# jupyter
-
-
+# data (stage 1-2)
 pandas
 numpy
 openpyxl
@@ -19,5 +11,22 @@ beautifulsoup4
 pdfplumber
 Faker
 PyYAML
+SQLAlchemy
+# ML (stage 2)
+lightgbm
+shap
+joblib
+# contracts, API, UI (stage 3-5)
+pydantic
+fastapi
+uvicorn
+httpx
+streamlit
+python-dotenv
+# LLM + guardrails (stage 4-5)
+anthropic
+presidio-analyzer
+# after install also run: python -m spacy download en_core_web_sm
+# dev
 pytest
 jupyter

@@ -26,7 +26,7 @@ from verified data, runs policy and safety checks, and sends nothing until a per
 ## Project layout
 
 ```text
-data/raw/          downloaded files (not committed; rebuilt by src/fetch_data.py)
+data/raw/          downloaded files (not committed; rebuilt by src/data/fetch_data.py)
 data/processed/    cleaned tables (not committed)
 notebooks/         exploration and profiling notebooks
 src/               Python code

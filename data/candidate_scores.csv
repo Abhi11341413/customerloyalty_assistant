@@ -1,0 +1,10 @@
+dataset_id,name,coverage,labels,size_quality,domain_fit,licence,effort,total
+D1,IBM Telco,3,5,4,5,4,5,83.0
+D2,Maven Telecom,4,5,4,5,4,2,80.0
+D7,UCI Credit Default,2,5,5,2,5,4,70.0
+D3,Orange BigML,2,5,3,4,2,4,64.0
+D5,UCI Online Retail II,2,1,5,3,5,3,58.0
+D4,Orange Belgium,2,4,4,3,1,3,56.0
+D6,Olist,3,2,4,2,1,2,50.0
+R3,Offers (scraped/hand),1,1,2,5,4,4,50.0
+D8,TRAI reports,1,1,2,3,4,2,38.0

@@ -9,7 +9,7 @@ kaggle.json
 .env
 *.key
 
-# --- Data: rebuilt by src/fetch_data.py, too big for GitHub ---
+# --- Data: rebuilt by src/data/fetch_data.py, too big for GitHub ---
 data/raw/*
 data/processed/*
 !data/raw/.gitkeep
@@ -33,4 +33,6 @@ outbox/
 *.log
 *.db
 
-src/data/fetch_data.py
+
+# --- spaCy / misc caches ---
+.pytest_cache/
