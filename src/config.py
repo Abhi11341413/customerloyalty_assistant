@@ -105,7 +105,7 @@ class BlockedPattern(_Strict):
 
 class Generation(_Strict):
     model_id: str
-    temperature: float
+    effort: Literal["low", "medium", "high", "xhigh", "max"]
     timeout_s: int
     max_retries: int
     subject_max_chars: int

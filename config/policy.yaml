@@ -96,8 +96,8 @@ blocked_language:
   - {pattern: '\b(we have (applied|waived|credited|refunded)|has been (waived|credited|refunded|applied to your (bill|account)))\b', category: unauthorised_financial_action, severity: block}
 
 generation:
-  model_id: "claude-sonnet-5-5"
-  temperature: 0.3
+  model_id: "claude-opus-5-5"
+  effort: low                  # Opus 5.5 rejects temperature; effort is the steadiness/cost lever
   timeout_s: 30
   max_retries: 1
   subject_max_chars: 80

@@ -1,0 +1,124 @@
+# Approved email templates (policy-controlled content).
+# Used two ways: (1) the approved example shown to the LLM for each objective,
+# (2) the fallback draft when the LLM is unavailable or returns invalid output.
+# Only {{placeholders}} from policy.generation.allowed_placeholders may appear.
+# Disclaimers, offer terms and dispute/support lines are appended by code, not written here.
+templates:
+  TPL-APPRECIATION:
+    objective: appreciation
+    subject: "Thank you for being with us, {{first_name}}"
+    body: |
+      Hi {{first_name}},
+
+      We wanted to say a simple thank you. You have been enjoying your {{plan_name}} plan steadily, and you keep your account in great shape. Customers like you are the reason we keep improving our network and our support.
+
+      If there is anything we can do to make your service even better, our team is always happy to help.
+    offer_paragraph: |
+      As a small thank-you, {{offer_name}} is ready for you: {{offer_value}}, available until {{offer_expiry}}. You can switch it on from your account whenever you like.
+    closing: "Thank you again for choosing us."
+    cta: "Switch on your thank-you perk from your account."
+    cta_no_offer: "Reply to this email if there is anything we can help with."
+    claims:
+      - {text: "You have been enjoying your plan steadily", evidence_field: usage_change_pct}
+      - {text: "You keep your account in great shape", evidence_field: on_time_rate}
+
+  TPL-REWARD:
+    objective: reward
+    subject: "A thank-you for your loyalty, {{first_name}}"
+    body: |
+      Hi {{first_name}},
+
+      You have been with us for a long time, and we are truly grateful. Your loyalty and your steady record with us have not gone unnoticed, and we would love to celebrate that with you.
+    offer_paragraph: |
+      To say thank you, we have picked a reward for you: {{offer_name}}, {{offer_value}}. It is available until {{offer_expiry}}, and you can claim it from your account in a couple of clicks.
+    closing: "Thank you for being part of our community. We look forward to many more years together."
+    cta: "Claim your reward from your account."
+    cta_no_offer: "Reply to this email if there is anything we can help with."
+    claims:
+      - {text: "You have been with us for a long time", evidence_field: tenure_months}
+      - {text: "Your steady record with us", evidence_field: on_time_rate}
+
+  TPL-REENGAGE:
+    objective: reengagement_offer
+    subject: "Getting more from your {{plan_name}} plan"
+    body: |
+      Hi {{first_name}},
+
+      We noticed you have been using your service a little less lately, so we wanted to check in. Your {{plan_name}} plan includes more than you might expect, and our team can help you set things up in the way that suits you best.
+
+      If something has not been working well, we would genuinely like to hear about it so we can put it right.
+    offer_paragraph: |
+      To help you rediscover your plan, {{offer_name}} is available to you: {{offer_value}}, until {{offer_expiry}}. You can turn it on from your account at any time.
+    closing: "Thank you for being with us."
+    cta: "Turn on your offer from your account."
+    cta_no_offer: "Reply to this email and tell us how we can help."
+    claims:
+      - {text: "You have been using your service a little less lately", evidence_field: usage_change_pct}
+
+  TPL-WINBACK:
+    objective: reengagement_offer
+    subject: "We have missed you, {{first_name}}"
+    body: |
+      Hi {{first_name}},
+
+      It has been a while since we last saw you using your service, so we simply wanted to say hello. There is no pressure at all: your {{plan_name}} plan is still here whenever you need it.
+
+      If anything has changed for you, or if there is something we could do better, we would be glad to hear from you.
+    offer_paragraph: |
+      If you would like to come back, {{offer_name}} is waiting for you: {{offer_value}}, available until {{offer_expiry}}.
+    closing: "We hope to see you again soon."
+    cta: "Come back and claim your offer from your account."
+    cta_no_offer: "Reply to this email whenever you are ready."
+    claims:
+      - {text: "It has been a while since we last saw you using your service", evidence_field: days_since_last_activity}
+
+  TPL-REMINDER-1:
+    objective: courteous_reminder
+    subject: "A friendly reminder about your bill"
+    body: |
+      Hi {{first_name}},
+
+      This is a friendly reminder that your bill of {{amount_due}} was due on {{due_date}}. It may simply have slipped through, which happens to all of us.
+
+      You can pay quickly and securely here: {{pay_link}}
+
+      If you have already paid, thank you, and please ignore this message.
+    closing: "Thank you for being with us."
+    cta: "Pay your bill online."
+    claims:
+      - {text: "Your bill was due", evidence_field: due_date}
+      - {text: "Bill amount", evidence_field: amount_due}
+
+  TPL-REMINDER-2:
+    objective: courteous_reminder
+    subject: "Your bill of {{amount_due}} is now overdue"
+    body: |
+      Hi {{first_name}},
+
+      Our records show that your bill of {{amount_due}}, due on {{due_date}}, has not been paid yet. Please make the payment when you can so your account stays in good standing.
+
+      You can pay online here: {{pay_link}}
+
+      If you are finding it hard to pay right now, please get in touch with our support team. We are happy to talk through your options.
+    closing: "Thank you for your attention."
+    cta: "Pay your bill online."
+    claims:
+      - {text: "Your bill has not been paid yet", evidence_field: due_date}
+      - {text: "Bill amount", evidence_field: amount_due}
+
+  TPL-REMINDER-3:
+    objective: firm_reminder
+    subject: "Important: your overdue bill of {{amount_due}}"
+    body: |
+      Hi {{first_name}},
+
+      Your bill of {{amount_due}}, which was due on {{due_date}}, is still unpaid. We have sent earlier reminders, and we now need you to settle this balance or contact us.
+
+      Please pay here: {{pay_link}}
+
+      If there is a reason you cannot pay at the moment, contact our support team so we can find a way forward together. We want to resolve this with you.
+    closing: "Thank you for taking care of this."
+    cta: "Pay your overdue bill online."
+    claims:
+      - {text: "Your bill is still unpaid", evidence_field: due_date}
+      - {text: "Bill amount", evidence_field: amount_due}
