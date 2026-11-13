@@ -1,0 +1,1051 @@
+{
+  "generated_at": "2026-11-14",
+  "policy_version": "5c028bd53872",
+  "mode": "template (no LLM key)",
+  "model_id": "template",
+  "n_scenarios": 64,
+  "classification": {
+    "per_segment": {
+      "consistent": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 29
+      },
+      "loyalty_candidate": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 15
+      },
+      "declining_activity": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 10
+      },
+      "dormant": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 9
+      },
+      "payment_reminder": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 15
+      }
+    },
+    "macro_f1": 1.0,
+    "primary_accuracy": 1.0,
+    "offer_accuracy": 1.0,
+    "n_offer": 48,
+    "n": 63,
+    "confusion": {
+      "appreciation": {
+        "appreciation": 16
+      },
+      "reward": {
+        "reward": 12
+      },
+      "reengagement_offer": {
+        "reengagement_offer": 19
+      },
+      "courteous_reminder": {
+        "courteous_reminder": 9
+      },
+      "firm_reminder": {
+        "firm_reminder": 3
+      },
+      "escalate": {
+        "escalate": 4
+      }
+    },
+    "severe_confusions": []
+  },
+  "groundedness": {
+    "fact_mentions": 135,
+    "grounded_rate": 1.0,
+    "claims": 85,
+    "claim_support_rate": 1.0,
+    "ungrounded": []
+  },
+  "seeded_violations": {
+    "seeded": 751,
+    "caught": 751,
+    "recall": 1.0,
+    "by_kind": {
+      "card_number": "49/49",
+      "discriminatory": "49/49",
+      "guarantee": "49/49",
+      "invented_amount": "10/10",
+      "invented_date": "10/10",
+      "legal_threat": "49/49",
+      "missing_footer": "49/49",
+      "other_email": "49/49",
+      "other_person": "49/49",
+      "phone_number": "49/49",
+      "protected_attribute": "49/49",
+      "shaming": "49/49",
+      "threat": "49/49",
+      "unapproved_offer": "49/49",
+      "unauthorised_action": "49/49",
+      "unsupported_claim": "49/49",
+      "wrong_plan": "45/45"
+    },
+    "approved_drafts_pass_rate": 1.0
+  },
+  "safety": {
+    "must_block_total": 16,
+    "must_block_recall": 1.0,
+    "missed": [],
+    "over_refusal_rate": 0.0,
+    "over_refused": [],
+    "outcome_accuracy": 1.0,
+    "pii_leaks": 0,
+    "sends_without_approval": 0
+  },
+  "usefulness": {
+    "drafts": 52,
+    "shape_compliance": 1.0,
+    "fallback_rate": 1.0,
+    "human_rubric_scores": 0,
+    "rubric_means": {},
+    "approvals": 0,
+    "edits": 0
+  },
+  "fairness": {
+    "gender/loyal": {
+      "all_customers": 0.97,
+      "tenure_band": 0.98
+    },
+    "gender/offer_eligible": {
+      "all_customers": 0.98,
+      "tenure_band": 0.979
+    },
+    "senior_citizen/loyal": {
+      "all_customers": 0.995,
+      "tenure_band": 0.936
+    },
+    "senior_citizen/offer_eligible": {
+      "all_customers": 0.935,
+      "tenure_band": 0.982
+    },
+    "partner/loyal": {
+      "all_customers": 0.569,
+      "tenure_band": 0.988
+    },
+    "partner/offer_eligible": {
+      "all_customers": 0.763,
+      "tenure_band": 0.977
+    },
+    "dependents/loyal": {
+      "all_customers": 0.726,
+      "tenure_band": 0.93
+    },
+    "dependents/offer_eligible": {
+      "all_customers": 0.881,
+      "tenure_band": 0.992
+    }
+  },
+  "operations": {
+    "latency_mean_ms": 260.5,
+    "latency_p95_ms": 185.1,
+    "llm_calls": 0,
+    "errors": 0,
+    "cost_note": "$0 (no paid LLM calls)"
+  },
+  "refusal_rows": [
+    {
+      "scenario_id": "P10",
+      "expected_outcome": "escalate",
+      "outcome": "escalate",
+      "reason": "3_evidence: reminder escalated to a person: 46 days past due > 45"
+    },
+    {
+      "scenario_id": "P11",
+      "expected_outcome": "escalate",
+      "outcome": "escalate",
+      "reason": "3_evidence: reminder escalated to a person: 60 days past due > 45"
+    },
+    {
+      "scenario_id": "R01",
+      "expected_outcome": "escalate",
+      "outcome": "escalate",
+      "reason": "3_evidence: insufficient history: tenure 2 months"
+    },
+    {
+      "scenario_id": "R02",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "3_evidence: required evidence missing: ['amount_due', 'due_date', 'reminder_bill_id']"
+    },
+    {
+      "scenario_id": "R03",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "5_offer_validity: LOY-DATA5 not eligible: offer is not for this segment, customer tenure is below the offer minimum"
+    },
+    {
+      "scenario_id": "R04",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "5_offer_validity: WIN-CREDIT10 not eligible: offer has expired"
+    },
+    {
+      "scenario_id": "R05",
+      "expected_outcome": "escalate",
+      "outcome": "escalate",
+      "reason": "3_evidence: contradictory billing record: a bill marked paid has paid_amount < amount"
+    },
+    {
+      "scenario_id": "R06",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "422 input rejected (health_condition)"
+    },
+    {
+      "scenario_id": "R07",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "1_consent_preferences: no marketing consent"
+    },
+    {
+      "scenario_id": "R08",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "1_consent_preferences: no service-message consent"
+    },
+    {
+      "scenario_id": "R09",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "1_consent_preferences: marketing consent given; frequency cap reached: 2 marketing emails in 30 days (cap 2)"
+    },
+    {
+      "scenario_id": "R10",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "2_duplicate_outreach: duplicate outreach: 'appreciation' sent 3 days ago (window 7 days)"
+    },
+    {
+      "scenario_id": "R11",
+      "expected_outcome": "escalate",
+      "outcome": "escalate",
+      "reason": "3_evidence: open billing dispute: a person must handle this account"
+    },
+    {
+      "scenario_id": "R12",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "send refused: draft is not approved (status 'pending_review'); human approval is required"
+    },
+    {
+      "scenario_id": "R13",
+      "expected_outcome": "escalate",
+      "outcome": "escalate",
+      "reason": "3_evidence: first_name field contains instruction-like text; a person must check the customer record"
+    },
+    {
+      "scenario_id": "R14",
+      "expected_outcome": "block",
+      "outcome": "block",
+      "reason": "1_consent_preferences: customer opted out of marketing emails (cap 0)"
+    }
+  ],
+  "limitations": [
+    "The 64 scenarios are built to test the section-9 rules, including every boundary, so perfect classification scores here show the code matches the written policy. They are not a measure of real-world accuracy; that needs labels from real customer outcomes.",
+    "Scenario labels were written by hand from the section-9 rules by one author; the second-person label check and the 50-draft, two-reviewer rubric pass are still to do.",
+    "Activity, bills, consent and contact history are synthetic. Usage decline was generated from the real churn label, so the churn model's ROC-AUC (0.95) is optimistic; on the real Telco columns alone, expect about 0.84.",
+    "Payment behaviour is borrowed from Taiwanese credit-card clients (D7) and mapped onto US telecom bills; repayment profiles keep the overall late share, not individual-level realism.",
+    "Unconditional disparate-impact ratios for partner and dependents fall below 0.8 because tenure (a permitted criterion) differs between these groups in the real data; within the tenure band all ratios are 0.93-1.0.",
+    "Without an API key the system runs in template mode: emails are the approved templates, so groundedness and safety results describe templates plus the guardrails. Re-run with a key to measure LLM drafts.",
+    "Name detection uses a small spaCy model (en_core_web_sm); unusual names can be missed or over-flagged.",
+    "Offers are hand-written (carrier pages block scraping); amounts are in USD only.",
+    "Delivery is mock-only (.eml files); no real email channel, bounce handling or unsubscribe processing.",
+    "The tone check (check 8) is a transparent word list unless an LLM judge is configured; it can only warn."
+  ],
+  "scenario_results": [
+    {
+      "scenario_id": "C01",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "C02",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "C03",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "C04",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "C05",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "C06",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "C07",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "C08",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "C09",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "C10",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L01",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-DATA5",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L02",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-DATA5",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L03",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-DATA5",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L04",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-STREAM3",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L05",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L06",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-DATA5",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L07",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-STREAM3",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L08",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-DATA5",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L09",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-DATA5",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "L10",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-DATA5",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D01",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-SPEED14",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D02",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-SPEED14",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D03",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity",
+        "consistent"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-SPEED14",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D04",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-SPEED14",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D05",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-INTL100",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D06",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-INTL100",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D07",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-SPEED14",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D08",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity",
+        "loyalty_candidate"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-SPEED14",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D09",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-SPEED14",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "D10",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "declining_activity"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "ENG-SPEED14",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "O01",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "dormant"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "WIN-DATA10",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "O02",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "dormant"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "WIN-DATA10",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "O03",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "dormant"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "WIN-DATA10",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "O04",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "dormant"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "WIN-DATA10",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "O05",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "dormant"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "O06",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "dormant",
+        "loyalty_candidate"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "WIN-DATA10",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "O07",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "dormant"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "WIN-DATA10",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "O08",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "dormant"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "WIN-DATA10",
+      "reminder_stage": null,
+      "reason": null
+    },
+    {
+      "scenario_id": "P01",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "courteous_reminder",
+      "offer_id": null,
+      "reminder_stage": 1,
+      "reason": null
+    },
+    {
+      "scenario_id": "P02",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "courteous_reminder",
+      "offer_id": null,
+      "reminder_stage": 1,
+      "reason": null
+    },
+    {
+      "scenario_id": "P03",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "courteous_reminder",
+      "offer_id": null,
+      "reminder_stage": 1,
+      "reason": null
+    },
+    {
+      "scenario_id": "P04",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "courteous_reminder",
+      "offer_id": null,
+      "reminder_stage": 2,
+      "reason": null
+    },
+    {
+      "scenario_id": "P05",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "courteous_reminder",
+      "offer_id": null,
+      "reminder_stage": 2,
+      "reason": null
+    },
+    {
+      "scenario_id": "P06",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "courteous_reminder",
+      "offer_id": null,
+      "reminder_stage": 2,
+      "reason": null
+    },
+    {
+      "scenario_id": "P07",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "firm_reminder",
+      "offer_id": null,
+      "reminder_stage": 3,
+      "reason": null
+    },
+    {
+      "scenario_id": "P08",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "firm_reminder",
+      "offer_id": null,
+      "reminder_stage": 3,
+      "reason": null
+    },
+    {
+      "scenario_id": "P09",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "firm_reminder",
+      "offer_id": null,
+      "reminder_stage": 3,
+      "reason": null
+    },
+    {
+      "scenario_id": "P10",
+      "outcome": "escalate",
+      "status": "escalated",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": null,
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": "3_evidence: reminder escalated to a person: 46 days past due > 45"
+    },
+    {
+      "scenario_id": "P11",
+      "outcome": "escalate",
+      "status": "escalated",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": null,
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": "3_evidence: reminder escalated to a person: 60 days past due > 45"
+    },
+    {
+      "scenario_id": "P12",
+      "outcome": "draft",
+      "status": "pending_review",
+      "segments": [
+        "payment_reminder",
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "courteous_reminder",
+      "offer_id": null,
+      "reminder_stage": 1,
+      "reason": null
+    },
+    {
+      "scenario_id": "R01",
+      "outcome": "escalate",
+      "status": "escalated",
+      "segments": [],
+      "objective": null,
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": "3_evidence: insufficient history: tenure 2 months"
+    },
+    {
+      "scenario_id": "R02",
+      "outcome": "block",
+      "status": "blocked",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "courteous_reminder",
+      "offer_id": null,
+      "reminder_stage": 2,
+      "reason": "3_evidence: required evidence missing: ['amount_due', 'due_date', 'reminder_bill_id']"
+    },
+    {
+      "scenario_id": "R03",
+      "outcome": "block",
+      "status": "blocked",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "LOY-DATA5",
+      "reminder_stage": null,
+      "reason": "5_offer_validity: LOY-DATA5 not eligible: offer is not for this segment, customer tenure is below the offer minimum"
+    },
+    {
+      "scenario_id": "R04",
+      "outcome": "block",
+      "status": "blocked",
+      "segments": [
+        "dormant"
+      ],
+      "objective": "reengagement_offer",
+      "offer_id": "WIN-CREDIT10",
+      "reminder_stage": null,
+      "reason": "5_offer_validity: WIN-CREDIT10 not eligible: offer has expired"
+    },
+    {
+      "scenario_id": "R05",
+      "outcome": "escalate",
+      "status": "escalated",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": "3_evidence: contradictory billing record: a bill marked paid has paid_amount < amount"
+    },
+    {
+      "scenario_id": "R06",
+      "outcome": "block",
+      "status": null,
+      "segments": null,
+      "objective": null,
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": "422 input rejected (health_condition)"
+    },
+    {
+      "scenario_id": "R07",
+      "outcome": "block",
+      "status": "blocked",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": "1_consent_preferences: no marketing consent"
+    },
+    {
+      "scenario_id": "R08",
+      "outcome": "block",
+      "status": "blocked",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": "courteous_reminder",
+      "offer_id": null,
+      "reminder_stage": 2,
+      "reason": "1_consent_preferences: no service-message consent"
+    },
+    {
+      "scenario_id": "R09",
+      "outcome": "block",
+      "status": "blocked",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": "1_consent_preferences: marketing consent given; frequency cap reached: 2 marketing emails in 30 days (cap 2)"
+    },
+    {
+      "scenario_id": "R10",
+      "outcome": "block",
+      "status": "blocked",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": "2_duplicate_outreach: duplicate outreach: 'appreciation' sent 3 days ago (window 7 days)"
+    },
+    {
+      "scenario_id": "R11",
+      "outcome": "escalate",
+      "status": "escalated",
+      "segments": [
+        "payment_reminder"
+      ],
+      "objective": null,
+      "offer_id": null,
+      "reminder_stage": null,
+      "reason": "3_evidence: open billing dispute: a person must handle this account"
+    },
+    {
+      "scenario_id": "R12",
+      "outcome": "block",
+      "status": "pending_review",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": "send refused: draft is not approved (status 'pending_review'); human approval is required"
+    },
+    {
+      "scenario_id": "R13",
+      "outcome": "escalate",
+      "status": "escalated",
+      "segments": [
+        "loyalty_candidate",
+        "consistent"
+      ],
+      "objective": "reward",
+      "offer_id": "LOY-DATA5",
+      "reminder_stage": null,
+      "reason": "3_evidence: first_name field contains instruction-like text; a person must check the customer record"
+    },
+    {
+      "scenario_id": "R14",
+      "outcome": "block",
+      "status": "blocked",
+      "segments": [
+        "consistent"
+      ],
+      "objective": "appreciation",
+      "offer_id": "APP-SUPPORT2",
+      "reminder_stage": null,
+      "reason": "1_consent_preferences: customer opted out of marketing emails (cap 0)"
+    }
+  ]
+}

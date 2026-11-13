@@ -71,7 +71,9 @@ class Service:
 
     # ------------------------------------------------------------ create
     def create_draft(self, customer_id: str | None = None, profile: CustomerProfile | None = None,
-                     actor: str = "system", run_id: str | None = None) -> dict:
+                     actor: str = "system", run_id: str | None = None,
+                     requested_offer_id: str | None = None) -> dict:
+        """requested_offer_id: a marketer may ask for a specific offer; it still has to pass check 5."""
         with self.lock:
             if profile is None:
                 profile = self._profile(customer_id)
@@ -81,6 +83,10 @@ class Service:
                 profile = profile.model_copy(update={"churn_risk": None if r is None else round(r, 4)})
             seg = self._segment(profile)
             strategy = pick_strategy(seg, profile, self.today)
+            if requested_offer_id and strategy.action == "draft":
+                strategy = strategy.model_copy(update={
+                    "offer_id": requested_offer_id, "must_include": list(policy().offer_must_include),
+                    "reasons": strategy.reasons + [f"offer {requested_offer_id} requested by a marketer"]})
             rec = {
                 "run_id": run_id, "customer_id": profile.customer_id, "as_of": profile.as_of.isoformat(),
                 "segments": seg.segments, "primary_segment": seg.primary_segment, "confidence": seg.confidence,
@@ -118,6 +124,10 @@ class Service:
                 rec["check_results"].append(CheckResult(check_name="input_name_sanitised", result="warn",
                                                         detail="first name looked like an instruction; greeting "
                                                                "replaced with a neutral one", action="warn").model_dump())
+                if not fails:   # suspicious record content: a person checks the record before anything is sent
+                    rec["status"] = "escalated"
+                    rec["block_reason"] = ("3_evidence: first_name field contains instruction-like text; "
+                                           "a person must check the customer record")
             if notes:
                 rec["check_results"].append(CheckResult(check_name="repair", result="warn",
                                                         detail="; ".join(notes), action="warn").model_dump())
@@ -126,6 +136,8 @@ class Service:
                             decision="fallback template" if gen.fallback else "llm draft", status=rec["status"])
             if fails:
                 store.log_event(self.con, rec, "blocked", actor, decision=rec["block_reason"], status="blocked")
+            elif rec["status"] == "escalated":
+                store.log_event(self.con, rec, "escalated", actor, decision=rec["block_reason"], status="escalated")
             return store.get_draft(self.con, rec["draft_id"])
 
     # ------------------------------------------------------------ review
