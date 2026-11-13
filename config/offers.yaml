@@ -1,0 +1,153 @@
+# Approved offers and rewards (hand-reviewed from data/offers_handwritten.csv).
+# Order matters: the first eligible offer for a segment is chosen.
+# value + unit are rendered by code; the LLM never sees them.
+offers:
+  - offer_id: LOY-DATA5
+    name: Loyalty Bonus Data
+    offer_type: reward
+    value: 5
+    unit: GB
+    terms: "5 GB of bonus high-speed data, added within 2 days of activation and usable for 30 days. One per customer. No cash value."
+    valid_from: 2026-09-01
+    valid_to: 2026-12-31
+    channel: email
+    for_segments: [loyalty_candidate]
+    eligibility: {min_tenure_months: 24, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [any]}
+    max_per_customer: 1
+    approval_status: approved
+    source_url: hand_written
+
+  - offer_id: LOY-STREAM3
+    name: Anniversary Streaming Add-on
+    offer_type: reward
+    value: 3
+    unit: months free
+    terms: "Streaming add-on free for 3 months, then it ends automatically with no charge. Internet plans only. One per customer."
+    valid_from: 2026-09-01
+    valid_to: 2027-01-31
+    channel: email
+    for_segments: [loyalty_candidate]
+    eligibility: {min_tenure_months: 24, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [Fiber, DSL]}
+    max_per_customer: 1
+    approval_status: approved
+    source_url: hand_written
+
+  - offer_id: LOY-DISC10
+    name: Loyal Customer Plan Discount
+    offer_type: reward
+    value: 10
+    unit: "% off for 6 months"
+    terms: "10% off the monthly plan charge for 6 bills."
+    valid_from: 2026-09-01
+    valid_to: 2026-12-31
+    channel: email
+    for_segments: [loyalty_candidate]
+    eligibility: {min_tenure_months: 24, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [any]}
+    max_per_customer: 1
+    approval_status: pending       # not yet approved by marketing/legal
+    source_url: hand_written
+
+  - offer_id: LOY-EARLY60
+    name: Upgrade Early Access
+    offer_type: reward
+    value: 60
+    unit: days early access
+    terms: "Early access to the device upgrade window for 60 days. Upgrade prices as listed at the time of upgrade."
+    valid_from: 2027-01-01         # not yet valid
+    valid_to: 2027-03-31
+    channel: email
+    for_segments: [loyalty_candidate]
+    eligibility: {min_tenure_months: 24, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [any]}
+    max_per_customer: 1
+    approval_status: approved
+    source_url: hand_written
+
+  - offer_id: APP-SUPPORT2
+    name: Tech Support Plus Trial
+    offer_type: perk
+    value: 2
+    unit: months free
+    terms: "Premium tech support free for 2 months, then it ends automatically with no charge."
+    valid_from: 2026-09-01
+    valid_to: 2026-12-31
+    channel: email
+    for_segments: [consistent]
+    eligibility: {min_tenure_months: 6, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [any]}
+    max_per_customer: 1
+    approval_status: approved
+    source_url: hand_written
+
+  - offer_id: ENG-SPEED14
+    name: Speed Boost Trial
+    offer_type: engagement
+    value: 14
+    unit: days free
+    terms: "Faster internet tier free for 14 days, then your plan returns to its current speed automatically. Internet plans only."
+    valid_from: 2026-09-01
+    valid_to: 2026-12-31
+    channel: email
+    for_segments: [declining_activity]
+    eligibility: {min_tenure_months: 3, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [Fiber, DSL]}
+    max_per_customer: 1
+    approval_status: approved
+    source_url: hand_written
+
+  - offer_id: ENG-INTL100
+    name: International Minutes Pack
+    offer_type: engagement
+    value: 100
+    unit: minutes
+    terms: "100 international minutes for 30 days after activation. Unused minutes expire."
+    valid_from: 2026-09-01
+    valid_to: 2026-12-31
+    channel: email
+    for_segments: [declining_activity]
+    eligibility: {min_tenure_months: 3, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [any]}
+    max_per_customer: 1
+    approval_status: approved
+    source_url: hand_written
+
+  - offer_id: ENG-SMSBOOST
+    name: Text Bundle Boost
+    offer_type: engagement
+    value: 500
+    unit: texts
+    terms: "500 extra texts for 30 days."
+    valid_from: 2026-09-01
+    valid_to: 2026-12-31
+    channel: sms                   # wrong channel for email
+    for_segments: [declining_activity]
+    eligibility: {min_tenure_months: 3, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [any]}
+    max_per_customer: 1
+    approval_status: approved
+    source_url: hand_written
+
+  - offer_id: WIN-CREDIT10
+    name: Welcome Back Bill Credit
+    offer_type: winback
+    value: 10
+    unit: USD bill credit
+    terms: "One-time $10 credit on the next bill after you use your service again."
+    valid_from: 2026-06-01
+    valid_to: 2026-10-31           # expired
+    channel: email
+    for_segments: [dormant]
+    eligibility: {min_tenure_months: 3, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [any]}
+    max_per_customer: 1
+    approval_status: approved
+    source_url: hand_written
+
+  - offer_id: WIN-DATA10
+    name: Come Back Data Pack
+    offer_type: winback
+    value: 10
+    unit: GB
+    terms: "10 GB of bonus data, usable for 30 days after activation. One per customer. No cash value."
+    valid_from: 2026-09-01
+    valid_to: 2026-12-31
+    channel: email
+    for_segments: [dormant]
+    eligibility: {min_tenure_months: 3, max_days_overdue: 0, needs_marketing_consent: true, plan_types: [any]}
+    max_per_customer: 1
+    approval_status: approved
+    source_url: hand_written

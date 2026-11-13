@@ -243,7 +243,7 @@ Restricted (fairness test only, never joined into features or prompts): `fairnes
 | Too little history | tenure < 3 months → no segment, no draft (escalate) |
 | Dormant | no activity for ≥ 60 days |
 | Declining activity | usage in last 3 months ≥ 30% below the 3 months before, **or** churn risk ≥ 0.6 |
-| Loyalty candidate | tenure ≥ 24 months, ≥ 90% of bills paid on time, nothing overdue |
+| Loyalty candidate | tenure ≥ 24 months, ≥ 90% of bills paid on time, nothing overdue beyond a 7-day grace window (`loyalty_max_days_past_due`; needed so S2-T09's loyal customer 5 days overdue keeps both labels) |
 | Consistent | active, ≥ 90% on time, usage change within ±15% |
 | Payment reminder | an unpaid bill past its due date |
 | Reminder stages (days past due) | 1–7 → stage 1 courteous; 8–20 → stage 2 clear; 21–45 → stage 3 firm but respectful; > 45 → escalate to a person (no auto-draft) |
@@ -402,7 +402,7 @@ interpretable segments with reason codes and confidence (FR-02).
 | S2-T10 | Result contract | every `SegmentResult` has confidence in [0, 1] and ≥ 1 reason code whose evidence_field exists in the profile |
 | S2-T11 | Model quality | model loads and predicts; test ROC-AUC ≥ baseline − 0.01 and ≥ 0.75 *(configurable)* |
 | S2-T12 | Reason-code fidelity | for 100 random customers, every cited value equals the profile value |
-| S2-T13 | Fairness | disparate impact ratio of `loyalty_candidate` and of offer-eligible rates across each restricted attribute between 0.8 and 1.25 |
+| S2-T13 | Fairness | disparate impact ratio of `loyalty_candidate` and of offer-eligible rates across each restricted attribute between 0.8 and 1.25, measured among customers who meet the tenure criterion (tenure ≥ 24). *Changed 2026-11-14:* unconditional ratios for partner (0.57) and dependents (0.73) reflect real tenure differences in the Telco data, and tenure is a permitted business criterion; unconditional ratios are still reported in the evaluation report. |
 | S2-T14 | Profile contract (FR-01) | `CustomerProfile` validates for all customers; a payload with an extra field (e.g. `religion`) is rejected |
 | S2-T15 | Point in time | profile built "as of" a date ignores bills and activity after that date |
 

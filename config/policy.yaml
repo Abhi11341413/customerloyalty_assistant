@@ -1,0 +1,135 @@
+# Policy configuration — every threshold and rule the system uses (R1, R8).
+# Changing a value here changes behaviour; change the tests in the same commit.
+version_label: "2026.11-v1"
+reference_date: 2026-11-14      # "today" for the synthetic data and the demo
+seed: 42
+currency: USD
+
+data:
+  months_of_history: 12
+  bill_due_days: 15             # due date = bill date + 15 days
+
+segments:
+  min_tenure_months: 3          # below this: insufficient history -> escalate
+  dormant_days_inactive: 60
+  declining_usage_drop: 0.30    # last 3 months >= 30% below the 3 before
+  declining_churn_risk: 0.60
+  loyalty_min_tenure_months: 24
+  loyalty_max_days_past_due: 7  # grace: a bill <= 7 days late does not cancel loyalty (S2-T09)
+  on_time_rate_min: 0.90
+  consistent_usage_band: 0.15   # usage change within +/- 15%
+  precedence: [payment_reminder, dormant, declining_activity, loyalty_candidate, consistent]
+
+strategies:
+  consistent:
+    objective: appreciation
+    tone: "warm, grateful"
+    template_id: TPL-APPRECIATION
+    allowed_offer_types: [perk]
+    consent_type: marketing
+    message_type: appreciation
+  loyalty_candidate:
+    objective: reward
+    tone: "warm, celebratory"
+    template_id: TPL-REWARD
+    allowed_offer_types: [reward]
+    consent_type: marketing
+    message_type: reward
+  declining_activity:
+    objective: reengagement_offer
+    tone: "encouraging, helpful"
+    template_id: TPL-REENGAGE
+    allowed_offer_types: [engagement]
+    consent_type: marketing
+    message_type: reengagement
+  dormant:
+    objective: reengagement_offer
+    tone: "friendly, low pressure"
+    template_id: TPL-WINBACK
+    allowed_offer_types: [winback]
+    consent_type: marketing
+    message_type: winback
+  payment_reminder:
+    objective: by_reminder_stage   # resolved from reminders.stages
+    tone: by_reminder_stage
+    template_id: by_reminder_stage
+    allowed_offer_types: []        # offers in reminders: never
+    consent_type: service
+    message_type: reminder
+
+reminders:
+  stages:
+    - {stage: 1, min_days: 1,  max_days: 7,  objective: courteous_reminder, tone: "courteous, friendly",        template_id: TPL-REMINDER-1}
+    - {stage: 2, min_days: 8,  max_days: 20, objective: courteous_reminder, tone: "clear, courteous",          template_id: TPL-REMINDER-2}
+    - {stage: 3, min_days: 21, max_days: 45, objective: firm_reminder,      tone: "firm but respectful",       template_id: TPL-REMINDER-3}
+  escalate_after_days: 45         # > 45 days past due -> a person handles it, no auto-draft
+  open_dispute: escalate          # never send a firmer reminder while a dispute is open
+  must_include: [amount_due, due_date, pay_link, support_contact, dispute_link]
+
+offer_must_include: [offer_name, offer_value, offer_expiry, offer_terms, unsubscribe]
+marketing_must_include: [unsubscribe]
+
+contact:
+  marketing_cap_per_30d: 2        # or the customer's own lower cap
+  duplicate_window_days: 7
+  marketing_message_types: [appreciation, reward, reengagement, winback]
+  service_message_types: [reminder]
+
+links:
+  pay_link: "https://example.com/pay"
+  dispute_link: "https://example.com/billing/dispute"
+  support_contact: "https://example.com/support"
+  unsubscribe_link: "https://example.com/unsubscribe"
+
+disclaimers:
+  unsubscribe: "You are receiving this email because you agreed to hear about offers from us. To stop these emails, visit https://example.com/unsubscribe."
+  reminder_footer: "If you think this bill is wrong, you can raise a dispute at https://example.com/billing/dispute and we will pause reminders while we look into it. For help, visit https://example.com/support."
+  offer_terms_prefix: "Offer terms: "
+
+blocked_language:
+  - {pattern: '\b(or else|we will (cut|disconnect|terminate|suspend) (you|your)|final warning)\b', category: threat, severity: block}
+  - {pattern: '\b(legal action|lawsuit|sue you|court|collections? agency|debt collector|credit score)\b', category: legal_threat, severity: block}
+  - {pattern: '\b(guarantee[ds]?|risk[- ]free|100% (free|certain|guaranteed))\b', category: guarantee, severity: block}
+  - {pattern: '\b(irresponsible|shameful|careless|deadbeat|ashamed|disappointing)\b', category: shaming, severity: block}
+  - {pattern: '\b(act now|last chance|hurry|don''t miss out|limited time only|right now)\b', category: pressure, severity: warn}
+  - {pattern: '\b(senior citizens?|elderly|old age|your age|single (people|customers)|married|your gender|religion|ethnicity)\b', category: discriminatory, severity: block}
+  - {pattern: '\b(we have (applied|waived|credited|refunded)|has been (waived|credited|refunded|applied to your (bill|account)))\b', category: unauthorised_financial_action, severity: block}
+
+generation:
+  model_id: "claude-sonnet-5-5"
+  temperature: 0.3
+  timeout_s: 30
+  max_retries: 1
+  subject_max_chars: 80
+  body_min_words: 60
+  body_max_words: 250
+  allowed_placeholders: [first_name, amount_due, due_date, plan_name, offer_name, offer_value,
+                         offer_expiry, pay_link, dispute_link, support_contact]
+
+fusion:
+  # D7 clients grouped by their six monthly repayment statuses (PAY_0..PAY_6)
+  payment_profiles:
+    on_time:    "no month late"
+    occasional: "1-2 late months, never more than 2 months behind"
+    frequent:   "3+ late months, never more than 2 months behind"
+    severe:     "3+ months behind at least once"
+  # tilt: relative chance of a late profile; rescaled so the overall late share equals D7's
+  late_tilt:
+    churned: 1.6
+    month_to_month: 1.3
+    other: 1.0
+
+model:
+  min_auc: 0.75
+  auc_tolerance_vs_baseline: 0.01
+  test_size: 0.2
+
+targets:
+  macro_f1: 0.85
+  severe_confusions: 0
+  grounding: 1.0
+  claim_support: 0.98
+  must_block_recall: 1.0
+  over_refusal_max: 0.05
+  pii_leaks: 0
+  sends_without_approval: 0
