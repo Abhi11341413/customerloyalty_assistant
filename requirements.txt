@@ -1,0 +1,23 @@
+# pandas
+# openpyxl
+# ucimlrepo
+# kaggle
+# requests
+# beautifulsoup4
+# jupyter
+
+
+pandas
+numpy
+openpyxl
+ucimlrepo
+kaggle
+datasets
+scikit-learn
+requests
+beautifulsoup4
+pdfplumber
+Faker
+PyYAML
+pytest
+jupyter

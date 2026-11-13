@@ -1,0 +1,36 @@
+# --- Python virtual environment (thousands of library files) ---
+myenv/
+venv/
+.venv/
+
+# --- Secrets: never upload these ---
+kaggle.json
+.kaggle/
+.env
+*.key
+
+# --- Data: rebuilt by src/fetch_data.py, too big for GitHub ---
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/processed/data_dictionary.csv
+.pytest_cache/
+# --- Python cache files ---
+__pycache__/
+*.pyc
+
+# --- Jupyter autosave copies ---
+.ipynb_checkpoints/
+
+# --- Editor and OS clutter ---
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Outputs we regenerate ---
+outbox/
+*.log
+*.db
+
+src/data/fetch_data.py
